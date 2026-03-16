@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Prinsip Dasar Desain Grafis</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&amp;family=Montserrat:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            width: 1280px;
+            height: 720px;
+            overflow: hidden;
+            font-family: 'Poppins', sans-serif;
+            background-color: #1a1a2e; /* Dark Blue-Purple Base */
+        }
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            background-color: #1a1a2e;
+            color: #ffffff;
+            overflow: hidden;
+        }
+        
+        /* Decorative Background Elements using solid colors instead of gradients */
+        .bg-circle-1 {
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background-color: #16213e;
+            opacity: 0.5;
+            z-index: 1;
+        }
+        
+        .bg-circle-2 {
+            position: absolute;
+            bottom: -150px;
+            left: -150px;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background-color: #0f3460;
+            opacity: 0.4;
+            z-index: 1;
+        }
+        
+        .accent-bar {
+            position: absolute;
+            top: 0;
+            left: 60px;
+            width: 15px;
+            height: 250px;
+            background-color: #e94560; /* Vibrant Red-Pink */
+            z-index: 2;
+        }
+        
+        .accent-dot {
+            position: absolute;
+            top: 265px;
+            left: 60px;
+            width: 15px;
+            height: 15px;
+            background-color: #fdbb2d; /* Orange/Yellow Accent */
+            border-radius: 50%;
+            z-index: 2;
+        }
+
+        .content-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: row;
+            z-index: 10;
+            padding: 60px 80px;
+            align-items: center;
+        }
+
+        .text-section {
+            flex: 1.2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-right: 40px;
+        }
+
+        .visual-section {
+            flex: 0.8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .main-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 64px;
+            font-weight: 800;
+            line-height: 1.1;
+            color: #ffffff;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+        }
+
+        .highlight-text {
+            color: #e94560;
+        }
+        
+        .highlight-text-2 {
+            color: #fdbb2d;
+        }
+
+        .subtitle {
+            font-size: 24px;
+            font-weight: 400;
+            color: #e0e0e0;
+            margin-bottom: 40px;
+            border-left: 4px solid #fdbb2d;
+            padding-left: 20px;
+            line-height: 1.4;
+        }
+
+        .info-box {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 18px;
+        }
+        
+        .info-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-icon {
+            width: 36px;
+            height: 36px;
+            background-color: #0f3460;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: #fdbb2d;
+            font-size: 16px;
+        }
+
+        .image-container {
+            position: relative;
+            width: 100%;
+            height: 450px;
+        }
+
+        .main-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+            z-index: 5;
+            position: relative;
+        }
+
+        .floating-banner {
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 220px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+            transform: rotate(10deg);
+            z-index: 2;
+            border: 4px solid #ffffff;
+        }
+
+        .decoration-grid {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            z-index: 1;
+        }
+
+        .grid-dot {
+            width: 6px;
+            height: 6px;
+            background-color: rgba(255,255,255,0.2);
+            border-radius: 50%;
+        }
+
+    </style>
+</head>
+<script>
+const TOTAL_SLIDES = 15;
+
+function getSlideNumber() {
+    const match = window.location.pathname.match(/slide(\d+)\.html/);
+    return match ? parseInt(match[1]) : 1;
+}
+
+function goNext() {
+    const current = getSlideNumber();
+    if (current < TOTAL_SLIDES) {
+        window.location.href = "slide" + (current + 1) + ".html";
+    }
+}
+
+function goPrev() {
+    const current = getSlideNumber();
+    if (current > 1) {
+        window.location.href = "slide" + (current - 1) + ".html";
+    }
+}
+
+document.addEventListener("click", function(e) {
+    const width = window.innerWidth;
+    const clickX = e.clientX;
+
+    if (clickX > width / 2) {
+        goNext();
+    } else {
+        goPrev();
+    }
+});
+
+document.addEventListener("keydown", function(e) {
+    if (e.key === "ArrowRight") goNext();
+    if (e.key === "ArrowLeft") goPrev();
+});
+</script>
+<script>
+document.documentElement.requestFullscreen?.();
+</script>
+<body>
+<div class="slide-container">
+<!-- Background Elements -->
+<div class="bg-circle-1"></div>
+<div class="bg-circle-2"></div>
+<div class="accent-bar"></div>
+<div class="accent-dot"></div>
+<div class="decoration-grid" style="top: 100px; left: 100px; right: auto; bottom: auto;">
+<div class="grid-dot"></div><div class="grid-dot"></div><div class="grid-dot"></div>
+<div class="grid-dot"></div><div class="grid-dot"></div><div class="grid-dot"></div>
+<div class="grid-dot"></div><div class="grid-dot"></div><div class="grid-dot"></div>
+</div>
+<div class="content-wrapper">
+<div class="text-section">
+<h1 class="main-title">
+                    PRINSIP DASAR<br/>
+<span class="highlight-text">DESAIN GRAFIS</span>
+</h1>
+<div class="subtitle">
+<p>Panduan praktis membuat banner yang <span class="highlight-text-2" style="font-weight: 600;">Menarik</span> dan <span class="highlight-text-2" style="font-weight: 600;">Mudah Dibaca</span> untuk pemula.</p>
+</div>
+<div class="info-box">
+<div class="info-item">
+<div class="info-icon"><i class="fas fa-book"></i></div>
+<p><strong>Mata Pelajaran:</strong> Desain Grafis | <strong>Kelas:</strong> XI</p>
+</div>
+<div class="info-item">
+<div class="info-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+<p><strong>Guru:</strong> Dahril Falah Ramadhan Mufa</p>
+</div>
+</div>
+</div>
+<div class="visual-section">
+<div class="image-container">
+<!-- Placeholder for Graphic Designer Illustration -->
+<img alt="Ilustrasi Desainer Grafis" class="main-image" src="https://page.gensparksite.com/slides_images/db20cac287a6dd2035340279e44a5553.webp"/>
+<!-- Decorative floating elements representing banners/events -->
+<img alt="Contoh Banner Event" class="floating-banner" src="https://page.gensparksite.com/slides_images/0b2b6a5eb93b7d23af9af50d8df533dc.webp"/>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

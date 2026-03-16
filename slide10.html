@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>5. Ruang (Space)</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&amp;family=Montserrat:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            width: 1280px;
+            height: 720px;
+            overflow: hidden;
+            font-family: 'Poppins', sans-serif;
+            background-color: #1a1a2e;
+            color: #ffffff;
+        }
+
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            background-color: #1a1a2e;
+            overflow: hidden;
+            padding: 40px 60px;
+        }
+
+        /* Decorative Background */
+        .bg-shape-1 {
+            position: absolute;
+            top: -100px;
+            right: -50px;
+            width: 400px;
+            height: 400px;
+            background-color: rgba(233, 69, 96, 0.05);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .bg-shape-2 {
+            position: absolute;
+            bottom: -80px;
+            left: -80px;
+            width: 300px;
+            height: 300px;
+            background-color: rgba(15, 52, 96, 0.3);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        /* Header */
+        .header {
+            margin-bottom: 25px;
+            z-index: 10;
+            position: relative;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 20px;
+        }
+
+        .header-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 42px;
+            font-weight: 800;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+        }
+
+        .header-title span {
+            color: #e94560;
+            margin-left: 10px;
+        }
+
+        .header-number {
+            background-color: #e94560;
+            color: white;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 24px;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+
+        /* Content Layout */
+        .content-wrapper {
+            display: flex;
+            flex: 1;
+            gap: 40px;
+            z-index: 10;
+            height: 100%;
+        }
+
+        .info-column {
+            flex: 0.8;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .visual-column {
+            flex: 1.2;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Info Cards */
+        .info-card {
+            background-color: rgba(22, 33, 62, 0.6);
+            border-radius: 12px;
+            padding: 20px;
+            border-left: 5px solid #fdbb2d;
+            backdrop-filter: blur(5px);
+        }
+
+        .info-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: #fdbb2d;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+
+        .info-title i {
+            margin-right: 10px;
+        }
+
+        .info-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .info-list li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+            color: #e0e0e0;
+            font-size: 16px;
+        }
+
+        .info-list li i {
+            color: #e94560;
+            margin-right: 10px;
+            margin-top: 5px;
+            font-size: 14px;
+        }
+
+        /* Highlight Box for Definition */
+        .definition-box {
+            background-color: rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .def-title {
+            color: #e94560;
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .def-text {
+            color: #d1d5db;
+            line-height: 1.6;
+        }
+
+        /* Warning Box */
+        .warning-box {
+            background-color: rgba(232, 65, 24, 0.15);
+            border: 1px solid rgba(232, 65, 24, 0.4);
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: auto;
+        }
+
+        .warning-text {
+            font-size: 16px;
+            color: #ffcccc;
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Comparison Section */
+        .comparison-container {
+            display: flex;
+            gap: 20px;
+            height: 100%;
+        }
+
+        .comparison-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            border: 2px solid transparent;
+            transition: transform 0.3s ease;
+        }
+
+        .comparison-item.good {
+            border-color: #4cd137;
+        }
+
+        .comparison-item.bad {
+            border-color: #e84118;
+        }
+
+        .comp-header {
+            padding: 15px;
+            text-align: center;
+            font-weight: 700;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 18px;
+            text-transform: uppercase;
+        }
+
+        .good .comp-header {
+            background-color: rgba(76, 209, 55, 0.2);
+            color: #4cd137;
+        }
+
+        .bad .comp-header {
+            background-color: rgba(232, 65, 24, 0.2);
+            color: #e84118;
+        }
+
+        .comp-image-container {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f5f6fa;
+            padding: 20px;
+        }
+
+        /* Visual Simulations */
+        .design-box {
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Bad Design (Cluttered) */
+        .cluttered-layout {
+            padding: 5px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr 1fr;
+            gap: 2px;
+            height: 100%;
+        }
+        
+        .clutter-item {
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: #333;
+            border: 1px solid #999;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .clutter-text-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255,255,0,0.8);
+            color: red;
+            font-weight: bold;
+            padding: 5px;
+            border: 2px dashed red;
+            font-size: 14px;
+            width: 80%;
+            text-align: center;
+        }
+
+        /* Good Design (Spacious) */
+        .spacious-layout {
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+        }
+        
+        .space-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .space-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .space-img {
+            width: 60px;
+            height: 60px;
+            background-color: #e94560;
+            border-radius: 50%;
+            margin-right: 20px;
+        }
+        
+        .space-text {
+            flex: 1;
+        }
+        
+        .space-line {
+            height: 8px;
+            background-color: #bdc3c7;
+            margin-bottom: 8px;
+            border-radius: 4px;
+            width: 100%;
+        }
+
+        .status-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 80px;
+            opacity: 0;
+            z-index: 5;
+            animation: popIn 0.5s 0.5s forwards;
+        }
+
+        .good .status-icon {
+            color: #4cd137;
+        }
+
+        .bad .status-icon {
+            color: #e84118;
+        }
+
+        @keyframes popIn {
+            0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+            80% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.8; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
+        }
+
+        .page-number {
+            position: absolute;
+            bottom: 30px;
+            right: 40px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+    </style>
+</head>
+<script>
+const TOTAL_SLIDES = 15;
+
+function getSlideNumber() {
+    const match = window.location.pathname.match(/slide(\d+)\.html/);
+    return match ? parseInt(match[1]) : 1;
+}
+
+function goNext() {
+    const current = getSlideNumber();
+    if (current < TOTAL_SLIDES) {
+        window.location.href = "slide" + (current + 1) + ".html";
+    }
+}
+
+function goPrev() {
+    const current = getSlideNumber();
+    if (current > 1) {
+        window.location.href = "slide" + (current - 1) + ".html";
+    }
+}
+
+document.addEventListener("click", function(e) {
+    const width = window.innerWidth;
+    const clickX = e.clientX;
+
+    if (clickX > width / 2) {
+        goNext();
+    } else {
+        goPrev();
+    }
+});
+
+document.addEventListener("keydown", function(e) {
+    if (e.key === "ArrowRight") goNext();
+    if (e.key === "ArrowLeft") goPrev();
+});
+</script>
+<script>
+document.documentElement.requestFullscreen?.();
+</script>
+<body>
+<div class="slide-container">
+<!-- Background Elements -->
+<div class="bg-shape-1"></div>
+<div class="bg-shape-2"></div>
+<div class="page-number">10</div>
+<!-- Header -->
+<div class="header">
+<h1 class="header-title">
+<div class="header-number">5</div>
+            Ruang <span class="highlight">(Space)</span>
+</h1>
+</div>
+<!-- Main Content -->
+<div class="content-wrapper">
+<!-- Left Column: Information -->
+<div class="info-column">
+<!-- Definition -->
+<div class="definition-box">
+<h3 class="def-title"><i class="fas fa-cube mr-2"></i> Definisi</h3>
+<p class="def-text">
+                        Ruang atau <em>White Space</em> adalah area kosong di antara dan di sekitar elemen desain (teks, gambar, logo) yang sengaja tidak diisi konten.
+                    </p>
+</div>
+<!-- Importance Card -->
+<div class="info-card">
+<h3 class="info-title"><i class="fas fa-star"></i> Pentingnya Ruang</h3>
+<ul class="info-list">
+<li><i class="fas fa-check-circle"></i> <span>Mencegah desain terlihat penuh &amp; sesak</span></li>
+<li><i class="fas fa-check-circle"></i> <span>Membuat tampilan lebih rapi &amp; elegan</span></li>
+<li><i class="fas fa-check-circle"></i> <span>Meningkatkan keterbacaan (readability)</span></li>
+<li><i class="fas fa-check-circle"></i> <span>Membantu fokus mata audiens</span></li>
+</ul>
+</div>
+<!-- Warning Box -->
+<div class="warning-box">
+<p class="warning-text">
+<i class="fas fa-exclamation-triangle mr-3"></i>
+<span><strong>Dampak Negatif:</strong> Jika semua area diisi teks dan gambar, desain akan terlihat sesak dan melelahkan mata pembaca.</span>
+</p>
+</div>
+</div>
+<!-- Right Column: Visual Comparison -->
+<div class="visual-column">
+<div class="comparison-container">
+<!-- Bad Example -->
+<div class="comparison-item bad">
+<div class="comp-header"><i class="fas fa-times-circle mr-2"></i> Tanpa Ruang (Sesak)</div>
+<div class="comp-image-container">
+<div class="design-box cluttered-layout">
+<div class="clutter-item">FOTO PRODUK 1</div>
+<div class="clutter-item">FOTO PRODUK 2</div>
+<div class="clutter-item">FOTO PRODUK 3</div>
+<div class="clutter-item">FOTO PRODUK 4</div>
+<div class="clutter-item">FOTO PRODUK 5</div>
+<div class="clutter-item">FOTO PRODUK 6</div>
+<div class="clutter-text-overlay">
+                                DISKON BESAR! BELI SEKARANG! HUBUNGI KAMI!
+                            </div>
+</div>
+<div class="status-icon"><i class="fas fa-times"></i></div>
+</div>
+</div>
+<!-- Good Example -->
+<div class="comparison-item good">
+<div class="comp-header"><i class="fas fa-check-circle mr-2"></i> White Space (Lega)</div>
+<div class="comp-image-container">
+<div class="design-box spacious-layout">
+<div class="space-title">PRODUK UTAMA</div>
+<div class="space-content">
+<div class="space-img"></div>
+<div class="space-text">
+<div class="space-line" style="width: 90%;"></div>
+<div class="space-line" style="width: 70%;"></div>
+<div class="space-line" style="width: 50%;"></div>
+</div>
+</div>
+</div>
+<div class="status-icon"><i class="fas fa-check"></i></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

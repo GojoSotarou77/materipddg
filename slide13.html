@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Merancang Banner Sederhana</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&amp;family=Montserrat:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        /* Base Styles */
+        body { 
+            margin: 0; 
+            padding: 0; 
+            width: 1280px; 
+            height: 720px; 
+            overflow: hidden; 
+            font-family: 'Poppins', sans-serif; 
+            background-color: #1a1a2e; 
+            color: #ffffff; 
+        }
+        
+        .slide-container { 
+            width: 1280px; 
+            height: 720px; 
+            position: relative; 
+            display: flex; 
+            flex-direction: column; 
+            background-color: #1a1a2e; 
+            overflow: hidden; 
+            padding: 40px 60px; 
+        }
+        
+        /* Background Decorations */
+        .bg-glow { 
+            position: absolute; 
+            width: 600px; 
+            height: 600px; 
+            background: rgba(0, 168, 255, 0.05); 
+            border-radius: 50%; 
+            top: -200px; 
+            left: -100px; 
+            z-index: 0; 
+            filter: blur(80px); 
+        }
+        
+        .bg-grid {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
+            z-index: 0;
+        }
+
+        /* Header */
+        .header { 
+            margin-bottom: 50px; 
+            z-index: 10; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        }
+        
+        .header-title { 
+            font-family: 'Montserrat', sans-serif; 
+            font-size: 38px; 
+            font-weight: 800; 
+            text-transform: uppercase; 
+            display: flex; 
+            align-items: center; 
+            gap: 20px; 
+            color: #ffffff;
+        }
+        
+        .icon-box { 
+            width: 56px; 
+            height: 56px; 
+            background: linear-gradient(135deg, #00a8ff, #0097e6); /* kept linear gradient as subtle background */
+            background-color: #00a8ff; /* Fallback */
+            border-radius: 12px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 24px; 
+            color: #fff; 
+            box-shadow: 0 4px 15px rgba(0, 168, 255, 0.4); 
+        }
+        
+        .page-number { 
+            font-family: 'Montserrat', sans-serif; 
+            font-size: 24px; 
+            font-weight: 700; 
+            color: rgba(255, 255, 255, 0.2); 
+        }
+
+        /* Steps Layout */
+        .steps-container { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: flex-start; 
+            z-index: 10; 
+            position: relative; 
+            margin-top: 20px; 
+            width: 100%;
+        }
+        
+        /* Connecting Line */
+        .connector-line { 
+            position: absolute; 
+            top: 60px; 
+            left: 80px; 
+            right: 80px; 
+            height: 4px; 
+            background: rgba(255,255,255,0.1); 
+            z-index: 1; 
+            border-radius: 2px; 
+        }
+
+        /* Step Card */
+        .step-card { 
+            width: 200px; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            text-align: center; 
+            position: relative; 
+            z-index: 2;
+            transition: transform 0.3s ease; 
+        }
+        
+        .step-card:hover { 
+            transform: translateY(-8px); 
+        }
+        
+        .step-circle { 
+            width: 120px; 
+            height: 120px; 
+            background: #1e273c; 
+            border: 3px solid; 
+            border-radius: 50%; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            margin-bottom: 20px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3); 
+            position: relative; 
+        }
+        
+        /* Number Badge */
+        .step-num { 
+            position: absolute; 
+            top: 0; 
+            right: 0; 
+            width: 36px; 
+            height: 36px; 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-weight: 800; 
+            font-family: 'Montserrat', sans-serif; 
+            color: #1a1a2e; 
+            font-size: 16px; 
+            box-shadow: 0 4px 8px rgba(0,0,0,0.4); 
+            border: 2px solid #1a1a2e;
+        }
+
+        /* Color Variations for Steps */
+        .step-1 .step-circle { border-color: #ff9f43; }
+        .step-1 .step-icon { color: #ff9f43; }
+        .step-1 .step-num { background: #ff9f43; }
+
+        .step-2 .step-circle { border-color: #ff6b6b; }
+        .step-2 .step-icon { color: #ff6b6b; }
+        .step-2 .step-num { background: #ff6b6b; }
+
+        .step-3 .step-circle { border-color: #e94560; }
+        .step-3 .step-icon { color: #e94560; }
+        .step-3 .step-num { background: #e94560; }
+
+        .step-4 .step-circle { border-color: #cd84f1; }
+        .step-4 .step-icon { color: #cd84f1; }
+        .step-4 .step-num { background: #cd84f1; }
+
+        .step-5 .step-circle { border-color: #00a8ff; }
+        .step-5 .step-icon { color: #00a8ff; }
+        .step-5 .step-num { background: #00a8ff; }
+
+        .step-icon { 
+            font-size: 36px; 
+        }
+
+        .step-title { 
+            font-family: 'Montserrat', sans-serif; 
+            font-weight: 700; 
+            font-size: 18px; 
+            margin-bottom: 8px; 
+            color: #ffffff; 
+            height: 50px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+        }
+        
+        .step-desc { 
+            font-size: 14px; 
+            color: #b2bec3; 
+            line-height: 1.5; 
+            padding: 0 5px; 
+        }
+
+        /* Tools Section */
+        .tools-section { 
+            margin-top: auto; 
+            background: rgba(255,255,255,0.03); 
+            padding: 15px 40px; 
+            border-radius: 16px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            border: 1px solid rgba(255,255,255,0.1); 
+            align-self: center; 
+            gap: 40px; 
+            width: 80%;
+            backdrop-filter: blur(10px);
+        }
+        
+        .tools-label { 
+            font-family: 'Montserrat', sans-serif; 
+            font-weight: 700; 
+            font-size: 16px; 
+            color: #e0e0e0; 
+            text-transform: uppercase; 
+            letter-spacing: 1px; 
+            display: flex;
+            align-items: center;
+        }
+        
+        .tool-badge { 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+            padding: 8px 20px; 
+            border-radius: 8px; 
+            background: rgba(0,0,0,0.2);
+            transition: background 0.3s;
+        }
+        
+        .tool-badge:hover {
+            background: rgba(255,255,255,0.05);
+        }
+        
+        .tool-icon { font-size: 22px; }
+        .tool-name { font-weight: 600; font-size: 16px; }
+
+        .tool-corel { color: #7bed9f; border: 1px solid rgba(123, 237, 159, 0.2); }
+        .tool-ps { color: #70a1ff; border: 1px solid rgba(112, 161, 255, 0.2); }
+
+    </style>
+</head>
+<script>
+const TOTAL_SLIDES = 15;
+
+function getSlideNumber() {
+    const match = window.location.pathname.match(/slide(\d+)\.html/);
+    return match ? parseInt(match[1]) : 1;
+}
+
+function goNext() {
+    const current = getSlideNumber();
+    if (current < TOTAL_SLIDES) {
+        window.location.href = "slide" + (current + 1) + ".html";
+    }
+}
+
+function goPrev() {
+    const current = getSlideNumber();
+    if (current > 1) {
+        window.location.href = "slide" + (current - 1) + ".html";
+    }
+}
+
+document.addEventListener("click", function(e) {
+    const width = window.innerWidth;
+    const clickX = e.clientX;
+
+    if (clickX > width / 2) {
+        goNext();
+    } else {
+        goPrev();
+    }
+});
+
+document.addEventListener("keydown", function(e) {
+    if (e.key === "ArrowRight") goNext();
+    if (e.key === "ArrowLeft") goPrev();
+});
+</script>
+<script>
+document.documentElement.requestFullscreen?.();
+</script>
+<body>
+<div class="slide-container">
+<!-- Decorations -->
+<div class="bg-glow"></div>
+<div class="bg-grid"></div>
+<!-- Header -->
+<div class="header">
+<h1 class="header-title">
+<div class="icon-box"><i class="fas fa-tasks"></i></div>
+                Merancang Banner Sederhana
+            </h1>
+<div class="page-number">13</div>
+</div>
+<!-- Steps Content -->
+<div class="steps-container">
+<!-- Connector Line -->
+<div class="connector-line"></div>
+<!-- Step 1 -->
+<div class="step-card step-1">
+<div class="step-circle">
+<div class="step-num">1</div>
+<i class="fas fa-lightbulb step-icon"></i>
+</div>
+<h4 class="step-title">Tentukan Tema</h4>
+<p class="step-desc">Pilih topik utama banner (Misal: Event, Promo, atau Info).</p>
+</div>
+<!-- Step 2 -->
+<div class="step-card step-2">
+<div class="step-circle">
+<div class="step-num">2</div>
+<i class="fas fa-heading step-icon"></i>
+</div>
+<h4 class="step-title">Tentukan Judul</h4>
+<p class="step-desc">Buat judul yang singkat, padat, dan menarik perhatian.</p>
+</div>
+<!-- Step 3 -->
+<div class="step-card step-3">
+<div class="step-circle">
+<div class="step-num">3</div>
+<i class="fas fa-images step-icon"></i>
+</div>
+<h4 class="step-title">Tambah Gambar</h4>
+<p class="step-desc">Pilih gambar/ilustrasi pendukung yang relevan &amp; berkualitas.</p>
+</div>
+<!-- Step 4 -->
+<div class="step-card step-4">
+<div class="step-circle">
+<div class="step-num">4</div>
+<i class="fas fa-th-large step-icon"></i>
+</div>
+<h4 class="step-title">Atur Posisi</h4>
+<p class="step-desc">Susun layout teks &amp; gambar agar seimbang dan rapi.</p>
+</div>
+<!-- Step 5 -->
+<div class="step-card step-5">
+<div class="step-circle">
+<div class="step-num">5</div>
+<i class="fas fa-check-double step-icon"></i>
+</div>
+<h4 class="step-title">Terapkan Prinsip</h4>
+<p class="step-desc">Pastikan prinsip kesatuan, keseimbangan, &amp; penekanan ada.</p>
+</div>
+</div>
+<!-- Tools Section -->
+<div class="tools-section">
+<div class="tools-label">
+<i class="fas fa-laptop-code mr-3"></i> Software Rekomendasi:
+            </div>
+<div class="tool-badge tool-corel">
+<i class="fas fa-pen-nib tool-icon"></i>
+<span class="tool-name">CorelDRAW</span>
+</div>
+<div class="tool-badge tool-ps">
+<i class="fas fa-magic tool-icon"></i>
+<span class="tool-name">Photoshop</span>
+</div>
+</div>
+</div>
+</body>
+</html>
