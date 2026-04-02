@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Prinsip Dasar Desain Grafis</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&amp;family=Montserrat:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            width: 1280px;
+            height: 720px;
+            overflow: hidden;
+            font-family: 'Poppins', sans-serif;
+            background-color: #1a1a2e;
+            color: #ffffff;
+        }
+
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            background-color: #1a1a2e;
+            overflow: hidden;
+            padding: 40px 60px;
+        }
+
+        /* Decorative Background */
+        .bg-accent-1 {
+            position: absolute;
+            top: -100px;
+            left: -50px;
+            width: 400px;
+            height: 400px;
+            background-color: rgba(233, 69, 96, 0.05);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .bg-accent-2 {
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            width: 350px;
+            height: 350px;
+            background-color: rgba(15, 52, 96, 0.3);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        /* Header */
+        .header {
+            margin-bottom: 30px;
+            z-index: 10;
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 42px;
+            font-weight: 800;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .header-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100px;
+            height: 5px;
+            background-color: #e94560;
+            border-radius: 2px;
+        }
+
+        .header-title span {
+            color: #fdbb2d;
+        }
+
+        .page-number {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Main Grid Content */
+        .content-wrapper {
+            flex: 1;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 25px;
+            flex: 1;
+            margin-bottom: 30px;
+        }
+
+        .principle-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .principle-card:hover {
+            transform: translateY(-5px);
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Color accents for cards */
+        .card-1 { border-top: 4px solid #e94560; } /* Red/Pink */
+        .card-2 { border-top: 4px solid #fdbb2d; } /* Yellow/Orange */
+        .card-3 { border-top: 4px solid #4cd137; } /* Green */
+        .card-4 { border-top: 4px solid #00a8ff; } /* Blue */
+        .card-5 { border-top: 4px solid #9c88ff; } /* Purple */
+        .card-6 { border-top: 4px solid #ff9f43; } /* Orange */
+
+        .icon-wrapper {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            font-size: 28px;
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .card-1 .icon-wrapper { color: #e94560; background-color: rgba(233, 69, 96, 0.15); }
+        .card-2 .icon-wrapper { color: #fdbb2d; background-color: rgba(253, 187, 45, 0.15); }
+        .card-3 .icon-wrapper { color: #4cd137; background-color: rgba(76, 209, 55, 0.15); }
+        .card-4 .icon-wrapper { color: #00a8ff; background-color: rgba(0, 168, 255, 0.15); }
+        .card-5 .icon-wrapper { color: #9c88ff; background-color: rgba(156, 136, 255, 0.15); }
+        .card-6 .icon-wrapper { color: #ff9f43; background-color: rgba(255, 159, 67, 0.15); }
+
+        .card-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .card-subtitle {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            font-style: italic;
+        }
+        
+        /* Footer Summary */
+        .footer-summary {
+            background-color: rgba(15, 52, 96, 0.6);
+            border-radius: 12px;
+            padding: 15px 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-left: 5px solid #e94560;
+        }
+        
+        .footer-text {
+            font-size: 18px;
+            color: #e0e0e0;
+            margin: 0;
+            text-align: center;
+        }
+        
+        .footer-highlight {
+            color: #ffffff;
+            font-weight: 600;
+            margin: 0 5px;
+            display: inline-block;
+            border-bottom: 2px solid rgba(233, 69, 96, 0.5);
+        }
+        
+        .check-icon {
+            color: #4cd137;
+            margin-right: 5px;
+        }
+
+    </style>
+</head>
+<script>
+const TOTAL_SLIDES = 15;
+
+function getSlideNumber() {
+    const match = window.location.pathname.match(/slide(\d+)\.html/);
+    return match ? parseInt(match[1]) : 1;
+}
+
+function goNext() {
+    const current = getSlideNumber();
+    if (current < TOTAL_SLIDES) {
+        window.location.href = "slide" + (current + 1) + ".html";
+    }
+}
+
+function goPrev() {
+    const current = getSlideNumber();
+    if (current > 1) {
+        window.location.href = "slide" + (current - 1) + ".html";
+    }
+}
+
+document.addEventListener("click", function(e) {
+    const width = window.innerWidth;
+    const clickX = e.clientX;
+
+    if (clickX > width / 2) {
+        goNext();
+    } else {
+        goPrev();
+    }
+});
+
+document.addEventListener("keydown", function(e) {
+    if (e.key === "ArrowRight") goNext();
+    if (e.key === "ArrowLeft") goPrev();
+});
+</script>
+<script>
+document.documentElement.requestFullscreen?.();
+</script>
+<body>
+<div class="slide-container">
+<!-- Background Elements -->
+<div class="bg-accent-1"></div>
+<div class="bg-accent-2"></div>
+<!-- Header -->
+<div class="header">
+<h1 class="header-title">Prinsip Dasar <span class="highlight">Desain Grafis</span></h1>
+<div class="page-number">05</div>
+</div>
+<!-- Main Content -->
+<div class="content-wrapper">
+<div class="grid-container">
+<!-- Card 1: Unity -->
+<div class="principle-card card-1">
+<div class="icon-wrapper">
+<i class="fas fa-puzzle-piece"></i>
+</div>
+<h3 class="card-title">Kesatuan</h3>
+<p class="card-subtitle">(Unity)</p>
+</div>
+<!-- Card 2: Balance -->
+<div class="principle-card card-2">
+<div class="icon-wrapper">
+<i class="fas fa-balance-scale"></i>
+</div>
+<h3 class="card-title">Keseimbangan</h3>
+<p class="card-subtitle">(Balance)</p>
+</div>
+<!-- Card 3: Composition -->
+<div class="principle-card card-3">
+<div class="icon-wrapper">
+<i class="fas fa-layer-group"></i>
+</div>
+<h3 class="card-title">Komposisi</h3>
+<p class="card-subtitle">(Composition)</p>
+</div>
+<!-- Card 4: Proportion -->
+<div class="principle-card card-4">
+<div class="icon-wrapper">
+<i class="fas fa-ruler-combined"></i>
+</div>
+<h3 class="card-title">Proporsi</h3>
+<p class="card-subtitle">(Proportion)</p>
+</div>
+<!-- Card 5: Space -->
+<div class="principle-card card-5">
+<div class="icon-wrapper">
+<i class="fas fa-expand-arrows-alt"></i>
+</div>
+<h3 class="card-title">Ruang</h3>
+<p class="card-subtitle">(Space)</p>
+</div>
+<!-- Card 6: Emphasis -->
+<div class="principle-card card-6">
+<div class="icon-wrapper">
+<i class="fas fa-bullhorn"></i>
+</div>
+<h3 class="card-title">Penekanan</h3>
+<p class="card-subtitle">(Emphasis)</p>
+</div>
+</div>
+<!-- Footer Benefits -->
+<div class="footer-summary">
+<p class="footer-text">
+                Prinsip-prinsip ini membantu desain agar: 
+                <span class="footer-highlight"><i class="fas fa-check check-icon"></i>Rapi</span> • 
+                <span class="footer-highlight"><i class="fas fa-check check-icon"></i>Enak Dilihat</span> • 
+                <span class="footer-highlight"><i class="fas fa-check check-icon"></i>Mudah Dipahami</span>
+</p>
+</div>
+</div>
+</div>
+</body>
+</html>

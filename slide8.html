@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>3. Komposisi (Composition)</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&amp;family=Montserrat:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            width: 1280px;
+            height: 720px;
+            overflow: hidden;
+            font-family: 'Poppins', sans-serif;
+            background-color: #1a1a2e;
+            color: #ffffff;
+        }
+
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            background-color: #1a1a2e;
+            overflow: hidden;
+            padding: 40px 60px;
+        }
+
+        /* Decorative Background */
+        .bg-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0;
+        }
+
+        .bg-accent-blob {
+            position: absolute;
+            bottom: -100px;
+            right: -100px;
+            width: 500px;
+            height: 500px;
+            background-color: rgba(76, 209, 55, 0.05);
+            border-radius: 50%;
+            filter: blur(40px);
+            z-index: 0;
+        }
+
+        /* Header */
+        .header {
+            margin-bottom: 25px;
+            z-index: 10;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 38px;
+            font-weight: 800;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+        }
+
+        .number-badge {
+            background-color: #4cd137;
+            color: #1a1a2e;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            margin-right: 20px;
+            font-size: 28px;
+            font-weight: 900;
+            box-shadow: 0 0 15px rgba(76, 209, 55, 0.4);
+        }
+
+        .page-number {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Content Layout */
+        .content-wrapper {
+            display: flex;
+            flex: 1;
+            gap: 50px;
+            z-index: 10;
+            height: 100%;
+        }
+
+        /* Left Column: Explanation */
+        .left-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .definition-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-left: 5px solid #4cd137;
+            padding: 25px;
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 30px;
+            backdrop-filter: blur(5px);
+        }
+
+        .definition-text {
+            font-size: 20px;
+            line-height: 1.6;
+            color: #e0e0e0;
+            margin: 0;
+        }
+
+        .highlight {
+            color: #4cd137;
+            font-weight: 700;
+        }
+
+        .elements-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .element-item {
+            background-color: rgba(22, 33, 62, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 12px 15px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+            color: #ffffff;
+            transition: transform 0.2s;
+        }
+
+        .element-item:hover {
+            transform: translateX(5px);
+            border-color: #4cd137;
+        }
+
+        .element-icon {
+            width: 30px;
+            height: 30px;
+            background-color: rgba(76, 209, 55, 0.2);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            color: #4cd137;
+            font-size: 14px;
+        }
+
+        .benefits-box {
+            background-color: rgba(76, 209, 55, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px dashed rgba(76, 209, 55, 0.3);
+        }
+
+        .benefits-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: #4cd137;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .benefits-tags {
+            display: flex;
+            gap: 10px;
+        }
+
+        .benefit-tag {
+            background-color: #4cd137;
+            color: #1a1a2e;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+        
+        .benefit-tag i {
+            margin-right: 5px;
+        }
+
+        /* Right Column: Visual Wireframe */
+        .right-column {
+            flex: 1.2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .wireframe-container {
+            width: 100%;
+            height: 100%;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            /* Blueprint grid effect */
+            background-image: 
+                linear-gradient(rgba(76, 209, 55, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(76, 209, 55, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .wireframe-label {
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background-color: #1a1a2e;
+            color: #ffffff;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            border: 1px solid #4cd137;
+            z-index: 20;
+        }
+
+        /* Wireframe Blocks */
+        .wf-block {
+            border: 2px dashed #1a1a2e;
+            background-color: rgba(230, 230, 230, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: #2f3640;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .wf-block:hover {
+            background-color: rgba(76, 209, 55, 0.2);
+            border-color: #4cd137;
+            border-style: solid;
+            color: #1a1a2e;
+        }
+
+        .wf-header {
+            height: 15%;
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+
+        .wf-image {
+            height: 45%;
+            margin-bottom: 15px;
+            font-size: 18px;
+            color: #555;
+            background-color: rgba(200, 200, 200, 0.3);
+        }
+        
+        .wf-icon-large {
+            font-size: 40px;
+            opacity: 0.3;
+            margin-bottom: 5px;
+        }
+
+        .wf-body {
+            height: 25%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 10px;
+            border: none;
+            background: transparent;
+        }
+        
+        .wf-text-line {
+            height: 8px;
+            background-color: #ccc;
+            margin-bottom: 8px;
+            border-radius: 4px;
+            width: 90%;
+        }
+        
+        .wf-text-line:last-child {
+            width: 60%;
+        }
+
+        .wf-footer {
+            height: 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 10px;
+            border: none;
+            background: transparent;
+        }
+        
+        .wf-logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #1a1a2e;
+            opacity: 0.2;
+        }
+        
+        .wf-contact {
+            width: 100px;
+            height: 10px;
+            background-color: #1a1a2e;
+            opacity: 0.2;
+            border-radius: 5px;
+        }
+
+        /* Reading Flow Arrow */
+        .flow-indicator {
+            position: absolute;
+            right: -30px;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 80%;
+            width: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .arrow-line {
+            width: 4px;
+            flex: 1;
+            background-color: #4cd137;
+            border-radius: 2px;
+            position: relative;
+        }
+        
+        .arrow-head {
+            color: #4cd137;
+            font-size: 24px;
+            margin-top: -10px;
+        }
+        
+        .flow-text {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            color: #4cd137;
+            font-weight: 600;
+            font-size: 12px;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Annotation Labels */
+        .annotation {
+            position: absolute;
+            background-color: #e94560;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+            z-index: 10;
+        }
+
+        .ann-1 { top: 15%; right: 20px; transform: translateX(50%); }
+        .ann-2 { top: 45%; right: 20px; transform: translateX(50%); }
+        .ann-3 { bottom: 20%; right: 20px; transform: translateX(50%); }
+
+    </style>
+</head>
+<script>
+const TOTAL_SLIDES = 15;
+
+function getSlideNumber() {
+    const match = window.location.pathname.match(/slide(\d+)\.html/);
+    return match ? parseInt(match[1]) : 1;
+}
+
+function goNext() {
+    const current = getSlideNumber();
+    if (current < TOTAL_SLIDES) {
+        window.location.href = "slide" + (current + 1) + ".html";
+    }
+}
+
+function goPrev() {
+    const current = getSlideNumber();
+    if (current > 1) {
+        window.location.href = "slide" + (current - 1) + ".html";
+    }
+}
+
+document.addEventListener("click", function(e) {
+    const width = window.innerWidth;
+    const clickX = e.clientX;
+
+    if (clickX > width / 2) {
+        goNext();
+    } else {
+        goPrev();
+    }
+});
+
+document.addEventListener("keydown", function(e) {
+    if (e.key === "ArrowRight") goNext();
+    if (e.key === "ArrowLeft") goPrev();
+});
+</script>
+<script>
+document.documentElement.requestFullscreen?.();
+</script>
+<body>
+<div class="slide-container">
+<!-- Background Elements -->
+<div class="bg-grid"></div>
+<div class="bg-accent-blob"></div>
+<!-- Header -->
+<div class="header">
+<h1 class="header-title">
+<div class="number-badge">3</div>
+                Komposisi (Composition)
+            </h1>
+<div class="page-number">08</div>
+</div>
+<!-- Main Content -->
+<div class="content-wrapper">
+<!-- Left Column: Text Info -->
+<div class="left-column">
+<div class="definition-card">
+<p class="definition-text">
+<strong>Komposisi</strong> adalah cara <span class="highlight">menyusun</span> dan mengatur elemen-elemen visual dalam sebuah bidang desain agar membentuk struktur yang utuh.
+                    </p>
+</div>
+<p style="font-family: 'Montserrat', sans-serif; font-weight: 600; margin-bottom: 15px; color: #fff;">
+<i class="fas fa-layer-group" style="color: #4cd137; margin-right: 8px;"></i> Elemen yang Disusun:
+                </p>
+<div class="elements-list">
+<div class="element-item">
+<div class="element-icon"><i class="fas fa-heading"></i></div>
+<p style="margin: 0;">Judul Utama</p>
+</div>
+<div class="element-item">
+<div class="element-icon"><i class="fas fa-image"></i></div>
+<p style="margin: 0;">Gambar</p>
+</div>
+<div class="element-item">
+<div class="element-icon"><i class="fas fa-align-left"></i></div>
+<p style="margin: 0;">Teks Informasi</p>
+</div>
+<div class="element-item">
+<div class="element-icon"><i class="fas fa-fingerprint"></i></div>
+<p style="margin: 0;">Logo / Kontak</p>
+</div>
+</div>
+<div class="benefits-box">
+<p class="benefits-title">Hasil Komposisi yang Baik:</p>
+<div class="benefits-tags">
+<div class="benefit-tag"><i class="fas fa-check"></i> Mudah Dibaca</div>
+<div class="benefit-tag"><i class="fas fa-check"></i> Tidak Membingungkan</div>
+<div class="benefit-tag"><i class="fas fa-check"></i> Rapi</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Wireframe Visual -->
+<div class="right-column">
+<div class="wireframe-container">
+<div class="wireframe-label">Layout Banner Ideal</div>
+<!-- Wireframe Elements -->
+<div class="wf-block wf-header">
+                        JUDUL UTAMA (Headline)
+                    </div>
+<div class="wf-block wf-image">
+<div style="display: flex; flex-direction: column; align-items: center;">
+<i class="fas fa-image wf-icon-large"></i>
+<span>GAMBAR PENDUKUNG</span>
+</div>
+</div>
+<div class="wf-body">
+<div class="wf-text-line"></div>
+<div class="wf-text-line"></div>
+<div class="wf-text-line"></div>
+</div>
+<div class="wf-footer">
+<div class="wf-logo"></div>
+<div class="wf-contact"></div>
+</div>
+<!-- Flow Indicator Overlay -->
+<div class="flow-indicator">
+<p class="flow-text">ALUR BACA</p>
+<div class="arrow-line"></div>
+<i class="fas fa-chevron-down arrow-head"></i>
+</div>
+<!-- Annotations -->
+<div class="annotation ann-1">Atas</div>
+<div class="annotation ann-2">Tengah</div>
+<div class="annotation ann-3">Bawah</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

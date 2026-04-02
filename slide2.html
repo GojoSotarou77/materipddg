@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Apa itu Desain Grafis?</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&amp;family=Montserrat:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            width: 1280px;
+            height: 720px;
+            overflow: hidden;
+            font-family: 'Poppins', sans-serif;
+            background-color: #1a1a2e;
+            color: #ffffff;
+        }
+        
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            background-color: #1a1a2e;
+            overflow: hidden;
+        }
+        
+        /* Background Decorations */
+        .bg-accent-1 {
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background-color: #16213e;
+            opacity: 0.6;
+            z-index: 1;
+        }
+        
+        .bg-accent-2 {
+            position: absolute;
+            bottom: -80px;
+            right: -80px;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background-color: #0f3460;
+            opacity: 0.5;
+            z-index: 1;
+        }
+
+        .header-bar {
+            position: absolute;
+            top: 40px;
+            left: 60px;
+            display: flex;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .header-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 42px;
+            font-weight: 700;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-left: 8px solid #e94560;
+            padding-left: 20px;
+        }
+
+        .content-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: row;
+            z-index: 10;
+            padding: 120px 60px 60px 60px;
+            gap: 50px;
+        }
+
+        .left-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .right-column {
+            flex: 1.1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .definition-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 30px;
+            backdrop-filter: blur(5px);
+        }
+
+        .definition-text {
+            font-size: 24px;
+            line-height: 1.6;
+            color: #e0e0e0;
+            margin: 0;
+        }
+
+        .highlight {
+            color: #fdbb2d;
+            font-weight: 600;
+        }
+
+        .goal-section {
+            background-color: rgba(233, 69, 96, 0.1);
+            border-left: 5px solid #e94560;
+            padding: 20px;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .goal-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: #e94560;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .goal-text {
+            font-size: 18px;
+            color: #ffffff;
+            margin: 0;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            height: 100%;
+        }
+
+        .grid-item {
+            background-color: #16213e;
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            height: 140px;
+        }
+        
+        .grid-item:nth-child(5) {
+            grid-column: span 2;
+            flex-direction: row;
+            height: 100px;
+        }
+
+        .icon-circle {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(253, 187, 45, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            color: #fdbb2d;
+            font-size: 28px;
+        }
+        
+        .grid-item:nth-child(5) .icon-circle {
+            margin-bottom: 0;
+            margin-right: 20px;
+            width: 50px;
+            height: 50px;
+            font-size: 24px;
+        }
+
+        .item-label {
+            font-size: 16px;
+            font-weight: 600;
+            color: #ffffff;
+            margin: 0;
+        }
+
+        .page-number {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.4);
+            z-index: 10;
+        }
+
+    </style>
+</head>
+<script>
+const TOTAL_SLIDES = 15;
+
+function getSlideNumber() {
+    const match = window.location.pathname.match(/slide(\d+)\.html/);
+    return match ? parseInt(match[1]) : 1;
+}
+
+function goNext() {
+    const current = getSlideNumber();
+    if (current < TOTAL_SLIDES) {
+        window.location.href = "slide" + (current + 1) + ".html";
+    }
+}
+
+function goPrev() {
+    const current = getSlideNumber();
+    if (current > 1) {
+        window.location.href = "slide" + (current - 1) + ".html";
+    }
+}
+
+document.addEventListener("click", function(e) {
+    const width = window.innerWidth;
+    const clickX = e.clientX;
+
+    if (clickX > width / 2) {
+        goNext();
+    } else {
+        goPrev();
+    }
+});
+
+document.addEventListener("keydown", function(e) {
+    if (e.key === "ArrowRight") goNext();
+    if (e.key === "ArrowLeft") goPrev();
+});
+</script>
+<script>
+document.documentElement.requestFullscreen?.();
+</script>
+<body>
+<div class="slide-container">
+<!-- Background Elements -->
+<div class="bg-accent-1"></div>
+<div class="bg-accent-2"></div>
+<div class="page-number">02</div>
+<!-- Header -->
+<div class="header-bar">
+<h1 class="header-title">Apa itu Desain Grafis?</h1>
+</div>
+<!-- Main Content -->
+<div class="content-wrapper">
+<!-- Left Column: Text Content -->
+<div class="left-column">
+<div class="definition-card">
+<p class="definition-text">
+                        Desain grafis adalah proses menggabungkan <span class="highlight">teks</span>, <span class="highlight">gambar</span>, <span class="highlight">warna</span>, dan <span class="highlight">bentuk</span> untuk menyampaikan pesan secara visual.
+                    </p>
+</div>
+<div class="goal-section">
+<h3 class="goal-title"><i class="fas fa-bullseye mr-2"></i> Tujuan Utama</h3>
+<p class="goal-text">Agar informasi mudah dipahami dan menarik perhatian orang yang melihatnya.</p>
+</div>
+</div>
+<!-- Right Column: Visual Grid -->
+<div class="right-column">
+<div class="grid-container">
+<!-- Item 1 -->
+<div class="grid-item">
+<div class="icon-circle">
+<i class="fas fa-bullhorn"></i>
+</div>
+<p class="item-label">Banner Promosi</p>
+</div>
+<!-- Item 2 -->
+<div class="grid-item">
+<div class="icon-circle">
+<i class="fas fa-calendar-alt"></i>
+</div>
+<p class="item-label">Poster Acara</p>
+</div>
+<!-- Item 3 -->
+<div class="grid-item">
+<div class="icon-circle">
+<i class="fas fa-ad"></i>
+</div>
+<p class="item-label">Iklan Produk</p>
+</div>
+<!-- Item 4 -->
+<div class="grid-item">
+<div class="icon-circle">
+<i class="fab fa-instagram"></i>
+</div>
+<p class="item-label">Konten Media Sosial</p>
+</div>
+<!-- Item 5 (Full Width) -->
+<div class="grid-item">
+<div class="icon-circle">
+<i class="fas fa-building"></i>
+</div>
+<p class="item-label">Logo Perusahaan &amp; Branding Identity</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
