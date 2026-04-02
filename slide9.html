@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>4. Proporsi (Proportion)</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&amp;family=Montserrat:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            width: 1280px;
+            height: 720px;
+            overflow: hidden;
+            font-family: 'Poppins', sans-serif;
+            background-color: #1a1a2e;
+            color: #ffffff;
+        }
+
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            background-color: #1a1a2e;
+            overflow: hidden;
+            padding: 40px 60px;
+        }
+
+        /* Decorative Background */
+        .bg-shape-1 {
+            position: absolute;
+            top: -100px;
+            right: -50px;
+            width: 400px;
+            height: 400px;
+            background-color: rgba(233, 69, 96, 0.05);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .bg-shape-2 {
+            position: absolute;
+            bottom: -80px;
+            left: -80px;
+            width: 300px;
+            height: 300px;
+            background-color: rgba(15, 52, 96, 0.3);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        /* Header */
+        .header {
+            margin-bottom: 30px;
+            z-index: 10;
+            position: relative;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 42px;
+            font-weight: 800;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+        }
+
+        .header-title span {
+            color: #e94560;
+            margin-left: 10px;
+        }
+
+        .header-number {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 60px;
+            font-weight: 800;
+            color: rgba(255, 255, 255, 0.1);
+            line-height: 1;
+        }
+
+        /* Content Layout */
+        .content-wrapper {
+            display: flex;
+            flex: 1;
+            gap: 40px;
+            z-index: 10;
+            height: 100%;
+        }
+
+        .info-column {
+            flex: 0.8;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding-right: 20px;
+        }
+
+        .visual-column {
+            flex: 1.2;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Info Cards */
+        .info-card {
+            background-color: rgba(22, 33, 62, 0.6);
+            border-radius: 12px;
+            padding: 20px;
+            border-left: 5px solid #fdbb2d;
+            margin-bottom: 20px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: #fdbb2d;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+
+        .info-title i {
+            margin-right: 10px;
+        }
+
+        .info-text {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #e0e0e0;
+            margin: 0;
+        }
+
+        .tag-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .tag {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 15px;
+            color: #e0e0e0;
+            display: flex;
+            align-items: center;
+            transition: transform 0.2s ease;
+        }
+        
+        .tag:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        .tag i {
+            margin-right: 10px;
+            color: #e94560;
+            font-size: 16px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .note-box {
+            background-color: rgba(233, 69, 96, 0.1);
+            border: 1px solid rgba(233, 69, 96, 0.3);
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: auto;
+        }
+
+        .note-text {
+            font-size: 15px;
+            color: #ffcccb;
+            margin: 0;
+            font-style: italic;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .note-text i {
+            margin-right: 10px;
+            margin-top: 4px;
+        }
+
+        /* Comparison Section */
+        .comparison-container {
+            display: flex;
+            gap: 20px;
+            height: 100%;
+        }
+
+        .comparison-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            border: 2px solid transparent;
+            transition: transform 0.3s ease;
+        }
+
+        .comparison-item.good {
+            border-color: #4cd137;
+        }
+
+        .comparison-item.bad {
+            border-color: #e84118;
+        }
+
+        .comp-header {
+            padding: 15px;
+            text-align: center;
+            font-weight: 700;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 18px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .good .comp-header {
+            background-color: rgba(76, 209, 55, 0.2);
+            color: #4cd137;
+        }
+
+        .bad .comp-header {
+            background-color: rgba(232, 65, 24, 0.2);
+            color: #e84118;
+        }
+
+        .comp-image-container {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f5f6fa;
+            padding: 20px;
+        }
+
+        /* Visual Representation of Proportion */
+        .design-mockup {
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        /* Bad Proportion Styling */
+        .bad .design-mockup {
+            justify-content: center;
+            align-items: center;
+        }
+
+        .bad-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 14px; /* Too small */
+            color: #2f3640;
+            margin-bottom: 10px;
+            background-color: #dfe4ea;
+            padding: 5px;
+            width: 80%;
+            text-align: center;
+        }
+
+        .bad-image {
+            width: 40px; /* Too small */
+            height: 40px;
+            background-color: #e84118;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        .bad-text {
+            font-size: 14px; /* Same size as title - bad contrast */
+            color: #57606f;
+            text-align: center;
+            line-height: 1.4;
+            width: 90%;
+        }
+
+        /* Good Proportion Styling */
+        .good .design-mockup {
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        .good-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 32px; /* Properly large */
+            color: #2f3640;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            text-align: center;
+            width: 100%;
+            border-bottom: 3px solid #fdbb2d;
+            padding-bottom: 10px;
+        }
+
+        .good-content-area {
+            display: flex;
+            width: 100%;
+            align-items: center;
+            margin-top: 10px;
+            gap: 15px;
+        }
+
+        .good-image {
+            width: 80px; /* Properly sized */
+            height: 80px;
+            background-color: #4cd137;
+            border-radius: 10px;
+            flex-shrink: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 30px;
+        }
+
+        .good-text-block {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .good-line {
+            height: 8px;
+            background-color: #dcdde1;
+            border-radius: 4px;
+            width: 100%;
+        }
+        
+        .good-line.short { width: 70%; }
+        .good-line.medium { width: 85%; }
+
+        .good-highlight {
+            background-color: #e94560;
+            color: white;
+            padding: 5px 10px;
+            font-weight: bold;
+            font-size: 14px;
+            border-radius: 4px;
+            align-self: flex-start;
+            margin-top: 5px;
+        }
+
+        .status-icon {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 40px;
+            z-index: 5;
+            background-color: white;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .good .status-icon {
+            color: #4cd137;
+            border: 3px solid #4cd137;
+        }
+
+        .bad .status-icon {
+            color: #e84118;
+            border: 3px solid #e84118;
+        }
+
+        .page-number {
+            position: absolute;
+            bottom: 30px;
+            right: 40px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Scale label */
+        .scale-label {
+            position: absolute;
+            font-size: 12px;
+            color: #aaa;
+            background: rgba(0,0,0,0.05);
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<script>
+const TOTAL_SLIDES = 15;
+
+function getSlideNumber() {
+    const match = window.location.pathname.match(/slide(\d+)\.html/);
+    return match ? parseInt(match[1]) : 1;
+}
+
+function goNext() {
+    const current = getSlideNumber();
+    if (current < TOTAL_SLIDES) {
+        window.location.href = "slide" + (current + 1) + ".html";
+    }
+}
+
+function goPrev() {
+    const current = getSlideNumber();
+    if (current > 1) {
+        window.location.href = "slide" + (current - 1) + ".html";
+    }
+}
+
+document.addEventListener("click", function(e) {
+    const width = window.innerWidth;
+    const clickX = e.clientX;
+
+    if (clickX > width / 2) {
+        goNext();
+    } else {
+        goPrev();
+    }
+});
+
+document.addEventListener("keydown", function(e) {
+    if (e.key === "ArrowRight") goNext();
+    if (e.key === "ArrowLeft") goPrev();
+});
+</script>
+<script>
+document.documentElement.requestFullscreen?.();
+</script>
+<body>
+<div class="slide-container">
+<!-- Background Elements -->
+<div class="bg-shape-1"></div>
+<div class="bg-shape-2"></div>
+<div class="page-number">09</div>
+<!-- Header -->
+<div class="header">
+<h1 class="header-title">4. Proporsi <span class="highlight">(Proportion)</span></h1>
+<div class="header-number">04</div>
+</div>
+<!-- Main Content -->
+<div class="content-wrapper">
+<!-- Left Column: Information -->
+<div class="info-column">
+<!-- Definition Card -->
+<div class="info-card">
+<h3 class="info-title"><i class="fas fa-balance-scale-right"></i> Definisi Proporsi</h3>
+<p class="info-text">
+                        Perbandingan ukuran antar elemen dalam desain untuk menciptakan hierarki visual yang jelas.
+                    </p>
+</div>
+<!-- Best Practices Card -->
+<div class="info-card" style="border-left-color: #e94560;">
+<h3 class="info-title" style="color: #e94560;"><i class="fas fa-thumbs-up"></i> Proporsi yang Tepat</h3>
+<div class="tag-container">
+<div class="tag"><i class="fas fa-heading"></i> Judul lebih besar dari teks biasa</div>
+<div class="tag"><i class="fas fa-exclamation"></i> Info penting lebih menonjol</div>
+<div class="tag"><i class="fas fa-image"></i> Gambar tidak terlalu kecil</div>
+</div>
+</div>
+<!-- Note Box -->
+<div class="note-box">
+<p class="note-text">
+<i class="fas fa-exclamation-triangle"></i>
+<span><strong>Dampak Proporsi Buruk:</strong> Desain akan terlihat aneh, membingungkan, dan tidak nyaman dilihat karena audiens tidak tahu mana yang penting.</span>
+</p>
+</div>
+</div>
+<!-- Right Column: Visual Comparison -->
+<div class="visual-column">
+<div class="comparison-container">
+<!-- Bad Example -->
+<div class="comparison-item bad">
+<div class="comp-header"><i class="fas fa-times-circle mr-2"></i> Proporsi Buruk</div>
+<div class="comp-image-container">
+<div class="design-mockup">
+<!-- Everything looks similar size -->
+<div class="bad-title">JUDUL UTAMA EVENT</div>
+<div class="bad-image"></div>
+<div class="bad-text">
+                                Informasi event ini sangat penting tapi ukurannya sama dengan judul sehingga membingungkan pembaca.
+                            </div>
+<div style="font-size: 14px; margin-top: 10px; color: red;">PROMO 50%</div>
+</div>
+<div class="status-icon"><i class="fas fa-times"></i></div>
+</div>
+</div>
+<!-- Good Example -->
+<div class="comparison-item good">
+<div class="comp-header"><i class="fas fa-check-circle mr-2"></i> Proporsi Baik</div>
+<div class="comp-image-container">
+<div class="design-mockup">
+<!-- Clear hierarchy through size -->
+<div class="good-title">JUDUL UTAMA</div>
+<div class="good-content-area">
+<div class="good-image"><i class="fas fa-star"></i></div>
+<div class="good-text-block">
+<div class="good-line"></div>
+<div class="good-line medium"></div>
+<div class="good-line short"></div>
+<div class="good-highlight">PROMO 50% OFF</div>
+</div>
+</div>
+</div>
+<div class="status-icon"><i class="fas fa-check"></i></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

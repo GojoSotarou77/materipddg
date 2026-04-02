@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mengapa Desain Banner Harus Baik?</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&amp;family=Montserrat:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            width: 1280px;
+            height: 720px;
+            overflow: hidden;
+            font-family: 'Poppins', sans-serif;
+            background-color: #1a1a2e;
+            color: #ffffff;
+        }
+
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            background-color: #1a1a2e;
+            overflow: hidden;
+            padding: 40px 60px;
+        }
+
+        /* Decorative Background */
+        .bg-shape-1 {
+            position: absolute;
+            top: -100px;
+            right: -50px;
+            width: 400px;
+            height: 400px;
+            background-color: rgba(233, 69, 96, 0.05);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .bg-shape-2 {
+            position: absolute;
+            bottom: -80px;
+            left: -80px;
+            width: 300px;
+            height: 300px;
+            background-color: rgba(15, 52, 96, 0.3);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        /* Header */
+        .header {
+            margin-bottom: 25px;
+            z-index: 10;
+            position: relative;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 38px;
+            font-weight: 800;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+        }
+
+        .header-title span {
+            color: #e94560;
+            margin-left: 10px;
+        }
+
+        .page-number {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Content Layout */
+        .content-wrapper {
+            display: flex;
+            flex: 1;
+            gap: 30px;
+            z-index: 10;
+            height: 100%;
+        }
+
+        /* Left Column: Negative Impact */
+        .column-bad {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background-color: rgba(232, 65, 24, 0.05);
+            border: 1px solid rgba(232, 65, 24, 0.2);
+            border-radius: 16px;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .column-header-bad {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(232, 65, 24, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .icon-box-bad {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(232, 65, 24, 0.2);
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            color: #e84118;
+            font-size: 24px;
+        }
+
+        .title-bad {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: #ff6b6b;
+        }
+
+        /* Right Column: Positive Impact */
+        .column-good {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background-color: rgba(76, 209, 55, 0.05);
+            border: 1px solid rgba(76, 209, 55, 0.2);
+            border-radius: 16px;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .column-header-good {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(76, 209, 55, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .icon-box-good {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(76, 209, 55, 0.2);
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            color: #4cd137;
+            font-size: 24px;
+        }
+
+        .title-good {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: #4cd137;
+        }
+
+        /* List Items */
+        .impact-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            flex: 1;
+        }
+
+        .impact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            padding: 12px;
+            background-color: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            transition: transform 0.2s;
+        }
+        
+        .impact-item:hover {
+            transform: translateX(5px);
+            background-color: rgba(255, 255, 255, 0.08);
+        }
+
+        .impact-icon {
+            margin-right: 15px;
+            margin-top: 3px;
+            font-size: 18px;
+        }
+
+        .bad .impact-icon {
+            color: #e84118;
+        }
+
+        .good .impact-icon {
+            color: #4cd137;
+        }
+
+        .impact-text {
+            font-size: 16px;
+            line-height: 1.4;
+            color: #e0e0e0;
+        }
+
+        /* Image Areas */
+        .image-area {
+            height: 200px;
+            margin-top: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            background-color: #0f3460;
+        }
+
+        .visual-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.9;
+        }
+
+        .overlay-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 8px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 14px;
+            backdrop-filter: blur(4px);
+        }
+
+        .bad .overlay-label {
+            background-color: rgba(232, 65, 24, 0.8);
+            color: white;
+        }
+
+        .good .overlay-label {
+            background-color: rgba(76, 209, 55, 0.8);
+            color: black;
+        }
+
+        /* Conclusion Banner */
+        .conclusion-banner {
+            margin-top: 25px;
+            background: linear-gradient(90deg, rgba(26, 26, 46, 0.8) 0%, rgba(233, 69, 96, 0.2) 50%, rgba(26, 26, 46, 0.8) 100%);
+            border: 1px solid rgba(233, 69, 96, 0.3);
+            border-radius: 50px;
+            padding: 12px 30px;
+            text-align: center;
+            position: relative;
+            z-index: 20;
+        }
+
+        .conclusion-text {
+            font-size: 18px;
+            color: #ffffff;
+            font-weight: 600;
+            margin: 0;
+            letter-spacing: 0.5px;
+        }
+        
+        .conclusion-text i {
+            color: #fdbb2d;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<script>
+const TOTAL_SLIDES = 15;
+
+function getSlideNumber() {
+    const match = window.location.pathname.match(/slide(\d+)\.html/);
+    return match ? parseInt(match[1]) : 1;
+}
+
+function goNext() {
+    const current = getSlideNumber();
+    if (current < TOTAL_SLIDES) {
+        window.location.href = "slide" + (current + 1) + ".html";
+    }
+}
+
+function goPrev() {
+    const current = getSlideNumber();
+    if (current > 1) {
+        window.location.href = "slide" + (current - 1) + ".html";
+    }
+}
+
+document.addEventListener("click", function(e) {
+    const width = window.innerWidth;
+    const clickX = e.clientX;
+
+    if (clickX > width / 2) {
+        goNext();
+    } else {
+        goPrev();
+    }
+});
+
+document.addEventListener("keydown", function(e) {
+    if (e.key === "ArrowRight") goNext();
+    if (e.key === "ArrowLeft") goPrev();
+});
+</script>
+<script>
+document.documentElement.requestFullscreen?.();
+</script>
+<body>
+<div class="slide-container">
+<!-- Background Elements -->
+<div class="bg-shape-1"></div>
+<div class="bg-shape-2"></div>
+<!-- Header -->
+<div class="header">
+<h1 class="header-title">Mengapa Desain <span class="highlight">Harus Baik?</span></h1>
+<div class="page-number">04</div>
+</div>
+<!-- Main Content -->
+<div class="content-wrapper">
+<!-- Left Column: Bad Design -->
+<div class="column-bad bad">
+<div class="column-header-bad">
+<div class="icon-box-bad">
+<i class="fas fa-thumbs-down"></i>
+</div>
+<h2 class="title-bad">Desain Tidak Rapi</h2>
+</div>
+<ul class="impact-list">
+<li class="impact-item">
+<i class="fas fa-eye-slash impact-icon"></i>
+<p class="impact-text">Informasi sulit dibaca dan membingungkan audiens.</p>
+</li>
+<li class="impact-item">
+<i class="fas fa-heart-broken impact-icon"></i>
+<p class="impact-text">Orang tidak tertarik untuk melihat atau membaca lebih lanjut.</p>
+</li>
+<li class="impact-item">
+<i class="fas fa-bullhorn impact-icon"></i>
+<p class="impact-text">Pesan yang ingin disampaikan gagal diterima dengan baik.</p>
+</li>
+</ul>
+<div class="image-area">
+<img alt="Contoh Banner Buruk dengan desain berantakan dan sulit dibaca" class="visual-img" src="D:\materipddg-main\materipddg-main\bw.jpeg"/>
+<div class="overlay-label">BANNER BURUK</div>
+</div>
+</div>
+<!-- Right Column: Good Design -->
+<div class="column-good good">
+<div class="column-header-good">
+<div class="icon-box-good">
+<i class="fas fa-thumbs-up"></i>
+</div>
+<h2 class="title-good">Desain Baik &amp; Benar</h2>
+</div>
+<ul class="impact-list">
+<li class="impact-item">
+<i class="fas fa-magnet impact-icon"></i>
+<p class="impact-text">Menarik perhatian orang seketika saat melihatnya.</p>
+</li>
+<li class="impact-item">
+<i class="fas fa-book-reader impact-icon"></i>
+<p class="impact-text">Mudah dibaca dan informasi tersusun secara logis.</p>
+</li>
+<li class="impact-item">
+<i class="fas fa-briefcase impact-icon"></i>
+<p class="impact-text">Terlihat profesional dan menyampaikan pesan dengan jelas.</p>
+</li>
+</ul>
+<div class="image-area">
+<img alt="Contoh Banner Bagus dengan desain rapi, profesional, dan mudah dibaca" class="visual-img" src="D:\materipddg-main\materipddg-main\bb.png"/>
+<div class="overlay-label">BANNER BAGUS</div>
+</div>
+</div>
+</div>
+<!-- Conclusion -->
+<div class="conclusion-banner">
+<p class="conclusion-text"><i class="fas fa-lightbulb"></i> Karena itu, kita perlu memahami <strong>Prinsip Dasar Desain Grafis</strong> agar hasil karya maksimal!</p>
+</div>
+</div>
+</body>
+</html>

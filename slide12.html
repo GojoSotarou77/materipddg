@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Analisis Desain Banner</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&amp;family=Montserrat:wght@400;500;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            width: 1280px;
+            height: 720px;
+            overflow: hidden;
+            font-family: 'Poppins', sans-serif;
+            background-color: #1a1a2e;
+            color: #ffffff;
+        }
+
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            background-color: #1a1a2e;
+            overflow: hidden;
+            padding: 40px 60px;
+        }
+
+        /* Decorative Background */
+        .bg-shape-1 {
+            position: absolute;
+            top: -100px;
+            left: -100px;
+            width: 500px;
+            height: 500px;
+            background-color: rgba(233, 69, 96, 0.05);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .bg-shape-2 {
+            position: absolute;
+            bottom: -150px;
+            right: -100px;
+            width: 600px;
+            height: 600px;
+            background-color: rgba(76, 209, 55, 0.03);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        /* Header */
+        .header {
+            margin-bottom: 25px;
+            z-index: 10;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 38px;
+            font-weight: 800;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+        }
+
+        .icon-badge {
+            background-color: #e94560;
+            color: white;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            margin-right: 20px;
+            font-size: 24px;
+            box-shadow: 0 4px 10px rgba(233, 69, 96, 0.4);
+        }
+
+        .page-number {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Content Layout */
+        .content-wrapper {
+            display: flex;
+            flex: 1;
+            gap: 30px;
+            z-index: 10;
+            height: 100%;
+        }
+
+        /* Banners Comparison Area */
+        .banners-area {
+            flex: 1.3;
+            display: flex;
+            gap: 20px;
+            align-items: stretch;
+        }
+
+        .banner-card {
+            flex: 1;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            border: 2px solid transparent;
+            transition: transform 0.3s;
+        }
+
+        .banner-card:hover {
+            transform: translateY(-5px);
+            background-color: rgba(255, 255, 255, 0.08);
+        }
+
+        .banner-label {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 15px;
+            padding: 8px;
+            border-radius: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .label-a {
+            background-color: rgba(253, 187, 45, 0.2);
+            color: #fdbb2d;
+            border: 1px solid rgba(253, 187, 45, 0.5);
+        }
+
+        .label-b {
+            background-color: rgba(76, 209, 55, 0.2);
+            color: #4cd137;
+            border: 1px solid rgba(76, 209, 55, 0.5);
+        }
+
+        .banner-placeholder {
+            flex: 1;
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Mockup Content for Banner A (Bad) */
+        .mockup-bad {
+            padding: 5px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2px;
+            height: 100%;
+            background-color: #ffcccc;
+        }
+
+        .mb-item {
+            background-color: #ffeb3b;
+            color: red;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-weight: bold;
+            border: 1px solid red;
+        }
+
+        .mb-text {
+            grid-column: span 2;
+            font-size: 14px;
+            background-color: blue;
+            color: lime;
+            text-align: center;
+            padding: 5px;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+        }
+
+        /* Mockup Content for Banner B (Good) */
+        .mockup-good {
+            padding: 0;
+            height: 100%;
+            background-color: #2d3436;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .mg-image {
+            height: 60%;
+            background-color: #0984e3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255,255,255,0.5);
+            font-size: 40px;
+        }
+
+        .mg-content {
+            padding: 15px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .mg-title {
+            color: #ffeaa7;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 22px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .mg-subtitle {
+            color: white;
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        /* Discussion Area */
+        .discussion-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .question-card {
+            background-color: rgba(22, 33, 62, 0.8);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #e94560;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        .q-number {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            width: 30px;
+            height: 30px;
+            background-color: #e94560;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-family: 'Montserrat', sans-serif;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .q-title {
+            color: #e94560;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 18px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .q-text {
+            color: #e0e0e0;
+            font-size: 15px;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .analysis-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .tag {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #b2bec3;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+        }
+        
+        .tag i {
+            margin-right: 5px;
+            color: #fdbb2d;
+        }
+
+        .discussion-instruction {
+            background-color: rgba(253, 187, 45, 0.1);
+            border: 1px dashed #fdbb2d;
+            border-radius: 12px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .instruction-icon {
+            font-size: 24px;
+            color: #fdbb2d;
+            margin-right: 15px;
+        }
+
+        .instruction-text {
+            color: #fdbb2d;
+            font-weight: 600;
+            font-size: 14px;
+            margin: 0;
+        }
+
+    </style>
+</head>
+<script>
+const TOTAL_SLIDES = 15;
+
+function getSlideNumber() {
+    const match = window.location.pathname.match(/slide(\d+)\.html/);
+    return match ? parseInt(match[1]) : 1;
+}
+
+function goNext() {
+    const current = getSlideNumber();
+    if (current < TOTAL_SLIDES) {
+        window.location.href = "slide" + (current + 1) + ".html";
+    }
+}
+
+function goPrev() {
+    const current = getSlideNumber();
+    if (current > 1) {
+        window.location.href = "slide" + (current - 1) + ".html";
+    }
+}
+
+document.addEventListener("click", function(e) {
+    const width = window.innerWidth;
+    const clickX = e.clientX;
+
+    if (clickX > width / 2) {
+        goNext();
+    } else {
+        goPrev();
+    }
+});
+
+document.addEventListener("keydown", function(e) {
+    if (e.key === "ArrowRight") goNext();
+    if (e.key === "ArrowLeft") goPrev();
+});
+</script>
+<script>
+document.documentElement.requestFullscreen?.();
+</script>
+<body>
+<div class="slide-container">
+<!-- Background Elements -->
+<div class="bg-shape-1"></div>
+<div class="bg-shape-2"></div>
+<!-- Header -->
+<div class="header">
+<h1 class="header-title">
+<div class="icon-badge"><i class="fas fa-search"></i></div>
+                Analisis Desain Banner
+            </h1>
+<div class="page-number">12</div>
+</div>
+<!-- Main Content -->
+<div class="content-wrapper">
+<!-- Banners Comparison -->
+<div class="banners-area">
+<!-- Banner A (Bad) -->
+<div class="banner-card">
+<div class="banner-label label-a">Banner A</div>
+<div class="banner-placeholder">
+<div class="mockup-bad">
+<div class="mb-text">SUPER SALE!!! MURAH BANGET LOH!!!</div>
+<div class="mb-item">FOTO 1</div>
+<div class="mb-item">FOTO 2</div>
+<div class="mb-item">DISKON 50%</div>
+<div class="mb-item">FOTO 3</div>
+<div class="mb-text" style="background-color: green; color: yellow; font-size: 10px;">HUBUNGI: 08123456789 (WA/SMS/TELP) - ALAMAT: JL. MAWAR MELATI SEMUANYA INDAH</div>
+</div>
+</div>
+</div>
+<!-- Banner B (Good) -->
+<div class="banner-card">
+<div class="banner-label label-b">Banner B</div>
+<div class="banner-placeholder">
+<div class="mockup-good">
+<div class="mg-image">
+<i class="fas fa-camera"></i>
+</div>
+<div class="mg-content">
+<div class="mg-title">Photography<br/>Workshop</div>
+<div class="mg-subtitle">Mastering Light &amp; Composition</div>
+<div style="margin-top: 10px; background-color: #ffeaa7; color: #2d3436; padding: 5px 10px; display: inline-block; font-weight: bold; border-radius: 4px; font-size: 10px; width: fit-content;">REGISTER NOW</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Questions & Discussion -->
+<div class="discussion-area">
+<!-- Question 1 -->
+<div class="question-card">
+<div class="q-number">1</div>
+<span class="q-title">Kesan Pertama</span>
+<p class="q-text">Mana banner yang lebih menarik perhatian Anda? Jelaskan alasannya secara singkat.</p>
+</div>
+<!-- Question 2 -->
+<div class="question-card">
+<div class="q-number">2</div>
+<span class="q-title">Analisis Kelebihan</span>
+<p class="q-text">Sebutkan minimal <strong>3 kelebihan</strong> dari banner yang menurut Anda lebih baik (Banner B).</p>
+</div>
+<!-- Question 3 -->
+<div class="question-card">
+<div class="q-number">3</div>
+<span class="q-title">Analisis Kekurangan</span>
+<p class="q-text">Sebutkan minimal <strong>2 kekurangan</strong> fatal dari desain banner yang kurang baik (Banner A).</p>
+</div>
+<!-- Focus Tags -->
+<div class="analysis-tags">
+<div class="tag"><i class="fas fa-palette"></i> Warna</div>
+<div class="tag"><i class="fas fa-font"></i> Font</div>
+<div class="tag"><i class="fas fa-th-large"></i> Tata Letak</div>
+<div class="tag"><i class="fas fa-text-height"></i> Ukuran Teks</div>
+<div class="tag"><i class="fas fa-ruler-combined"></i> Kerapian</div>
+</div>
+<!-- Instruction -->
+<div class="discussion-instruction">
+<i class="fas fa-comments instruction-icon"></i>
+<p class="instruction-text">Diskusikan dengan teman sebangku Anda dan catat poin-poin pentingnya!</p>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
